@@ -37,7 +37,7 @@ export class CartComponent implements OnInit {
   }
 
   onSubmit() {
-    // this.model.tacos = this.cart.getItemsInCart();
+    // this.model.domain = this.cart.getItemsInCart();
     this.cart.getItemsInCart().forEach(cartItem => {
       this.model.tacos.push(cartItem.taco);
     });
