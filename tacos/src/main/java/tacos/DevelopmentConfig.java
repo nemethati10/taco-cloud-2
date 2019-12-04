@@ -1,5 +1,6 @@
 package tacos;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,11 +9,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import tacos.data.IngredientRepository;
 import tacos.data.TacoRepository;
 import tacos.data.UserRepository;
+import tacos.messaging.JmsOrderMessagingService;
 
+import java.sql.Date;
+import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @Profile("!prod")
 @Configuration
+@Slf4j
 public class DevelopmentConfig {
 
     @Bean
@@ -67,6 +74,38 @@ public class DevelopmentConfig {
                 tacoRepository.save(taco3);
 
             }
+        };
+    }
+
+    @Profile({"jms-template", "jms-listener"})
+    @Bean
+    public CommandLineRunner sendOrderWithJms(final JmsOrderMessagingService jmsOrderMessagingService) {
+
+        return new CommandLineRunner() {
+            @Override
+            public void run(final String... args) throws Exception {
+                final Order order = new Order();
+                order.setId(999L);
+                order.setPlacedAt(Date.from(Instant.now()));
+                order.setDeliveryZip("555555");
+                order.setDeliveryStreet("Street");
+                order.setDeliveryState("TN");
+                order.setDeliveryCity("TEST CITY");
+                order.setDeliveryName("JMS");
+                order.setCcNumber("342549548976904");
+                order.setCcCVV("456");
+                order.setCcExpiration("12/12");
+                final List<Taco> tacos = new ArrayList<>();
+                final Taco taco = new Taco();
+                taco.setName("Test taco");
+                tacos.add(taco);
+                order.setTacos(tacos);
+
+
+                jmsOrderMessagingService.sendOrder(order);
+                log.info("Order was sent via JMS: " + order);
+            }
+
         };
     }
 }

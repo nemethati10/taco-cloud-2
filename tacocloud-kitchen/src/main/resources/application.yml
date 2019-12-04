@@ -1,0 +1,17 @@
+server:
+  port: 8081
+
+spring:
+  profiles: jms-template, jms-listener
+
+  jms:
+    template:
+      receive-timeout: 2
+
+  artemis:
+    host: localhost
+    port: 61616
+    user: admin
+    password:
+    embedded:
+      enabled: false
