@@ -48,6 +48,7 @@ public class OrderApiController {
     public Order patchOrder(@PathVariable("orderId") final Long orderId, @RequestBody final Order patch) {
 
         final Order order = orderRepository.findById(orderId).get();
+
         if (patch.getDeliveryName() != null) {
             order.setDeliveryName(patch.getDeliveryName());
         }
