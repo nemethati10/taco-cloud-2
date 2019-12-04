@@ -47,7 +47,7 @@ public class DevelopmentConfig {
                 ingredientRepository.save(sourCream);
 
 
-                userRepository.save(new User("habuma", encoder.encode("password"),
+                userRepository.save(new User("dev", encoder.encode("developer"),
                         "Craig Walls", "123 North Street", "Cross Roads", "TX",
                         "76227", "123-123-1234"));
 

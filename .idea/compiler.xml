@@ -15,5 +15,9 @@
         <module name="tacos" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="tacocloud-web" target="1.8" />
+      <module name="tacocloudweb" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
