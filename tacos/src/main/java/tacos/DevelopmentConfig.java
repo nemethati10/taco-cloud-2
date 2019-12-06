@@ -11,11 +11,7 @@ import tacos.data.TacoRepository;
 import tacos.data.UserRepository;
 import tacos.messaging.JmsOrderMessagingService;
 
-import java.sql.Date;
-import java.time.Instant;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 @Profile("!prod")
 @Configuration
@@ -86,21 +82,20 @@ public class DevelopmentConfig {
             public void run(final String... args) throws Exception {
                 final Order order = new Order();
                 order.setId(999L);
-                order.setPlacedAt(Date.from(Instant.now()));
-                order.setDeliveryZip("555555");
-                order.setDeliveryStreet("Street");
-                order.setDeliveryState("TN");
-                order.setDeliveryCity("TEST CITY");
-                order.setDeliveryName("JMS");
-                order.setCcNumber("342549548976904");
-                order.setCcCVV("456");
-                order.setCcExpiration("12/12");
-                final List<Taco> tacos = new ArrayList<>();
-                final Taco taco = new Taco();
-                taco.setName("Test taco");
-                tacos.add(taco);
-                order.setTacos(tacos);
-
+//                order.setPlacedAt(Date.from(Instant.now()));
+//                order.setDeliveryZip("555555");
+//                order.setDeliveryStreet("Street");
+//                order.setDeliveryState("TN");
+//                order.setDeliveryCity("TEST CITY");
+//                order.setDeliveryName("JMS");
+//                order.setCcNumber("342549548976904");
+//                order.setCcCVV("456");
+//                order.setCcExpiration("12/12");
+//                final List<Taco> tacos = new ArrayList<>();
+//                final Taco taco = new Taco();
+//                taco.setName("Test taco");
+//                tacos.add(taco);
+//                order.setTacos(tacos);
 
                 jmsOrderMessagingService.sendOrder(order);
                 log.info("Order was sent via JMS: " + order);

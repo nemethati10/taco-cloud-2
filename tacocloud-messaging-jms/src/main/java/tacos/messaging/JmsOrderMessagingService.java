@@ -72,9 +72,9 @@ public class JmsOrderMessagingService implements OrderMessagingService {
     @Bean
     public MappingJackson2MessageConverter messageConverter() {
         MappingJackson2MessageConverter messageConverter = new MappingJackson2MessageConverter();
-        messageConverter.setTypeIdPropertyName("_typeId");
+        messageConverter.setTypeIdPropertyName("id");
         final Map<String, Class<?>> typeIdMappings = new HashMap<String, Class<?>>();
-        typeIdMappings.put("order", Order.class);
+        typeIdMappings.put("order", tacos.Order.class);
         messageConverter.setTypeIdMappings(typeIdMappings);
 
         return messageConverter;
