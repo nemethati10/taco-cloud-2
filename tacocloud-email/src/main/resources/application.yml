@@ -1,0 +1,15 @@
+spring:
+  main:
+    web-application-type: none
+
+tacocloud:
+  email:
+    host: imap.gmail.com
+    mailbox: INBOX
+    username: test
+    password: test
+    poll-rate: 10000
+
+
+  api:
+    url: http://localhost:8080/orders/fromEmail
